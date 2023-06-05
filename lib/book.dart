@@ -1,14 +1,15 @@
 import 'generals.dart';
 
 class Book implements SaveInfo {
+  int id;
   String name;
   String author;
   double price;
   int existence;
 
-  Book(this.name, this.author, this.price, this.existence) {}
+  Book(this.id, this.name, this.author, this.price, this.existence) {}
 
-  Book.Empty() : this('', '', 0, 0);
+  Book.Empty() : this(0, '', '', 0, 0);
 
   void Sell() {
     this.existence -= 1;
@@ -16,11 +17,19 @@ class Book implements SaveInfo {
 
   @override
   String toString() {
-    return 'Name:$name\nAuthor:$author\nPrice:$price\nExistence:$existence';
+    return 'Id:$id\nName:$name\nAuthor:$author\nPrice:$price\nExistence:$existence';
   }
 
   @override
   String formatToSave() {
-    return '$name|$author|$price|$existence';
+    return '$id|$name|$author|$price|$existence';
+  }
+
+  static int searchItem(int id, List<Book> books) {
+    for (int i = 0; i < books.length; i++) {
+      if (id == books[i].id) return i;
+    }
+
+    return -1;
   }
 }

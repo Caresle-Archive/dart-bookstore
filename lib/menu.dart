@@ -1,3 +1,4 @@
+import 'client.dart';
 import 'book.dart';
 import 'dart:io';
 
@@ -18,6 +19,8 @@ void bookMenu() {
 }
 
 Book bookCreate() {
+  print('Id: ');
+  int id = int.parse(stdin.readLineSync() ?? '0');
   print('Name: ');
   String name = stdin.readLineSync() ?? '';
 
@@ -30,7 +33,7 @@ Book bookCreate() {
   print('Existence: ');
   int existence = int.parse(stdin.readLineSync() ?? '0');
 
-  var book = Book(name, author, price, existence);
+  var book = Book(id, name, author, price, existence);
   return book;
 }
 
@@ -47,4 +50,36 @@ void clientMenu() {
   print('3) Update clients');
   print('4) Delete clients');
   print('b) Back');
+}
+
+Client clientCreate() {
+  print('Id:');
+  int id = int.parse(stdin.readLineSync() ?? '0');
+  print('Name:');
+  String name = stdin.readLineSync() ?? '';
+  print('Age:');
+  int age = int.parse(stdin.readLineSync() ?? '0');
+
+  var client = Client(id, name, age);
+  return client;
+}
+
+void clientShow(List<Client> clients) {
+  print('===\tClients\t===');
+  for (Client client in clients)
+    print(client);
+  print('===\t  END  \t===');
+}
+
+void clientUpdate(List<Client> clients) {
+  print('Id:');
+  int id = int.parse(stdin.readLineSync() ?? '0');
+  int item = Client.searchItem(id, clients);
+  
+  if (item == -1) {
+    print('Doesn\'t found the client');
+    return;
+  }
+
+  clients[item] = clientCreate();
 }

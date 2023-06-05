@@ -15,4 +15,13 @@ class Client extends Person {
   String formatToSave() {
     return '$id|$name|$age';
   }
+
+  static int searchItem(int id, List<Client> clients) {
+    for (int i = 0; i < clients.length; i++) {
+      if (id == clients[i].id)
+        return i;
+    }
+    
+    return -1;
+  }
 }
