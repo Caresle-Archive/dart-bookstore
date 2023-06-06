@@ -46,6 +46,8 @@ void main() {
   List<Book> books = List.empty(growable: true);
   List<Client> clients = List.empty(growable: true);
 
+  Init.loadData(books, clients);
+
   while (result != 's') {
     menu.mainMenu();
     result = stdin.readLineSync();
@@ -55,6 +57,7 @@ void main() {
 
     if (result == '2')
       handleClientMenu(clients);
-    // ADD CLEAR CONSOLE
   }
+
+  Init.finishProgram(books, clients);
 }
