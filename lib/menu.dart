@@ -18,9 +18,11 @@ void bookMenu() {
   print('b) Back');
 }
 
-Book bookCreate() {
-  print('Id: ');
-  int id = int.parse(stdin.readLineSync() ?? '0');
+Book bookCreate({ int id = 0 }) {
+  if (id == 0) {
+    print('Id: ');
+    id = int.parse(stdin.readLineSync() ?? '0');
+  }
   print('Name: ');
   String name = stdin.readLineSync() ?? '';
 
@@ -44,6 +46,32 @@ void bookShow(List<Book> books) {
   print('===\t  END  \t===');
 }
 
+void bookUpdate(List<Book> books) {
+  print('Id:');
+  int id = int.parse(stdin.readLineSync() ?? '0');
+  int item = Book.searchItem(id, books);
+
+  if (item == -1) {
+    print('Book doesn\'t found');
+    return;
+  }
+
+  books[item] = bookCreate(id: id);
+}
+
+void bookDelete(List<Book> books) {
+  print('Id:');
+  int id = int.parse(stdin.readLineSync() ?? '0');
+  int item = Book.searchItem(id, books);
+  
+  if (item == -1) {
+    print('Book doesn\'t found');
+    return;
+  }
+
+  books.removeAt(item);
+}
+
 void clientMenu() {
   print('1) Create client');
   print('2) Show Clients');
@@ -52,9 +80,11 @@ void clientMenu() {
   print('b) Back');
 }
 
-Client clientCreate() {
-  print('Id:');
-  int id = int.parse(stdin.readLineSync() ?? '0');
+Client clientCreate({ int id = 0 }) {
+  if (id == 0) {
+    print('Id:');
+    id = int.parse(stdin.readLineSync() ?? '0');
+  }
   print('Name:');
   String name = stdin.readLineSync() ?? '';
   print('Age:');
@@ -81,5 +111,18 @@ void clientUpdate(List<Client> clients) {
     return;
   }
 
-  clients[item] = clientCreate();
+  clients[item] = clientCreate(id: id);
+}
+
+void clientDelete(List<Client> clients) {
+  print('Id:');
+  int id = int.parse(stdin.readLineSync() ?? '0');
+  int item = Client.searchItem(id, clients);
+
+  if (item == -1) {
+    print('Doesn\'t found the client');
+    return;
+  }
+
+  clients.removeAt(item);
 }

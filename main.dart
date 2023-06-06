@@ -4,16 +4,22 @@ import 'lib/client.dart';
 import 'init.dart';
 import 'dart:io';
 
-void handleBookMenu(List<Book> list) {
+void handleBookMenu(List<Book> books) {
   String? option = '';
   menu.bookMenu();
   option = stdin.readLineSync();
 
   if (option == '1')
-    list.add(menu.bookCreate());
+    books.add(menu.bookCreate());
 
   if (option == '2')
-    menu.bookShow(list);
+    menu.bookShow(books);
+
+  if (option == '3')
+    menu.bookUpdate(books);
+
+  if (option == '4')
+    menu.bookDelete(books);
 }
 
 void handleClientMenu(List<Client> clients) {
@@ -28,10 +34,10 @@ void handleClientMenu(List<Client> clients) {
     menu.clientShow(clients);
 
   if (option == '3')
-    print('update clients');
+    menu.clientUpdate(clients);
 
   if (option == '4')
-    print('delete clients');
+    menu.clientDelete(clients);
 }
 
 void main() {
